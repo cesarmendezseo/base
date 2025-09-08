@@ -18,45 +18,49 @@
           <div class="flex items-center ms-3">
            {{-- modo Claro - Oscuro --}}
           <button 
-    x-data="{ dark: localStorage.getItem('theme') === 'dark' }"
-    @click="
-        dark = !dark;
-        if (dark) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
-    "
-    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
->
-    <!-- Ícono sol (modo claro) -->
-    <svg x-show="!dark"
-         xmlns="http://www.w3.org/2000/svg" 
-         class="w-6 h-6 text-yellow-500" fill="none" 
-         viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-              d="M12 3v1m0 16v1m8.66-10h1M3.34 12h1m12.02-7.07l.71.71M5.93 18.36l.71.71m12.02 0l-.71-.71M5.93 5.64l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-    </svg>
+               x-data="{ dark: localStorage.getItem('theme') === 'dark' }"
+               @click="
+                  dark = !dark;
+                  if (dark) {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                  } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                  }
+               "
+               class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            >
+               <!-- Ícono sol (modo claro) -->
+               <svg x-show="!dark"
+                     xmlns="http://www.w3.org/2000/svg" 
+                     class="w-6 h-6 text-yellow-500" fill="none" 
+                     viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M12 3v1m0 16v1m8.66-10h1M3.34 12h1m12.02-7.07l.71.71M5.93 18.36l.71.71m12.02 0l-.71-.71M5.93 5.64l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+               </svg>
 
-    <!-- Ícono luna (modo oscuro) -->
-    <svg x-show="dark"
-         xmlns="http://www.w3.org/2000/svg" 
-         class="w-6 h-6 text-gray-200" fill="none" 
-         viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-    </svg>
-</button>
+               <!-- Ícono luna (modo oscuro) -->
+               <svg x-show="dark"
+                     xmlns="http://www.w3.org/2000/svg" 
+                     class="w-6 h-6 text-gray-200" fill="none" 
+                     viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+               </svg>
+            </button>
 
             {{-- foto --}}
             <div>
-              <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-              </button>
-            </div>
+              <button type="button" 
+            class="flex items-center justify-center w-8 h-8 text-sm font-bold text-white bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            aria-expanded="false" 
+            data-dropdown-toggle="dropdown-user">
+
+            <span class="sr-only">Open user menu</span>
+            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            </button>
+             </div>
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
               <div class="px-4 py-3" role="none">
                
@@ -67,7 +71,7 @@
               <ul class="py-1" role="none">
                
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
+                  <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Perfil</a>
                 </li>
                 
                 <form method="POST" action="{{ route('logout') }}" class="w-full">

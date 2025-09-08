@@ -1,8 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+  <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
+            {{ __('Perfil') }}
         </h2>
+        <div class="flex items-center space-x-4">
+        </div>
     </x-slot>
 
     <div class="py-12">
