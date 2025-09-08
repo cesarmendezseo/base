@@ -16,6 +16,41 @@
       </div>
       <div class="flex items-center">
           <div class="flex items-center ms-3">
+           {{-- modo Claro - Oscuro --}}
+          <button 
+    x-data="{ dark: localStorage.getItem('theme') === 'dark' }"
+    @click="
+        dark = !dark;
+        if (dark) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        }
+    "
+    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+>
+    <!-- Ícono sol (modo claro) -->
+    <svg x-show="!dark"
+         xmlns="http://www.w3.org/2000/svg" 
+         class="w-6 h-6 text-yellow-500" fill="none" 
+         viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M12 3v1m0 16v1m8.66-10h1M3.34 12h1m12.02-7.07l.71.71M5.93 18.36l.71.71m12.02 0l-.71-.71M5.93 5.64l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+    </svg>
+
+    <!-- Ícono luna (modo oscuro) -->
+    <svg x-show="dark"
+         xmlns="http://www.w3.org/2000/svg" 
+         class="w-6 h-6 text-gray-200" fill="none" 
+         viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+    </svg>
+</button>
+
+            {{-- foto --}}
             <div>
               <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span class="sr-only">Open user menu</span>
@@ -165,6 +200,21 @@
       </li>
       </ul>
    </div>
+   <script>
+  // Al cargar la página
+  if (localStorage.theme === 'dark' || 
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+
+  // Función para cambiar
+  function toggleTheme() {
+    document.documentElement.classList.toggle('dark')
+    localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  }
+</script>
 </aside>
 
 
