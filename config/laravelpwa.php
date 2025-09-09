@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'name' => 'Sitio PWA',
+    'name' => 'Sitio Veteranos',
     'manifest' => [
-        'name' => env('APP_NAME', 'My PWA App'),
+        'name' => env('APP_NAME', 'Veteranos BV'),
         'short_name' => 'PWA',
         'start_url' => '/',
         'background_color' => '#ffffff',

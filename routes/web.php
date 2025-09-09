@@ -47,7 +47,13 @@ use Spatie\Permission\Middleware\PermissionMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-Route::view('/', 'welcome');
+//Route::view('/', 'welcome');
+
+Route::get('/', PaginaPrincipal::class)->name('pagina.principal');
+Route::get('/frontend/tabla-posicion-index', TablaPosicionTablaPosicionIndex::class)->name('tabla-posicion-index');
+Route::get('/frontend/tabla-posicion/{campeonatoId}/ver', TablaPosicionResultados::class)->name('tabla-posicion-resultados');
+Route::get('/frontend/fixture-index', FixtureFixtureIndex::class)->name('frontend.fixture.index');
+Route::get('/frontend/fixture/{campeonatoId}/ver-fixture', FixtureFixtureVer::class)->name('frontend.fixture.verFixture');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -64,11 +70,7 @@ Route::post('/logout', function (Request $request) {
     return redirect('/');
 })->name('logout');
 
-//Route::get('/', PaginaPrincipal::class)->name('pagina.principal');
-Route::get('/tabla-posicion-index', TablaPosicionTablaPosicionIndex::class)->name('tabla-posicion-index');
-Route::get('/tabla-posicion/{campeonatoId}/ver', TablaPosicionResultados::class)->name('tabla-posicion-resultados');
-Route::get('/fixture-index', FixtureFixtureIndex::class)->name('frontend.fixture.index');
-Route::get('/fixture/{campeonatoId}/ver-fixture', FixtureFixtureVer::class)->name('frontend.fixture.verFixture');
+
 
 
 Route::middleware([PermissionMiddleware::class . ':ver-usuarios'])->group(function () {});
